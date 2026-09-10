@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>支付的選擇-金錢規劃（國中） - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-wallet"></i> 支付的選擇-金錢規劃（國中）
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-junior"><i class="fa-solid fa-user-graduate"></i> 國中階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-credit-card"></i> 金錢規劃</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：支付的選擇（貨幣演進、儲值卡、信用卡與行動支付）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010260200000000000&type=Doc&PKID=6a5e52b0-3602-431b-a3e6-e09cbd0a2608" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立國中">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：七年二班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 瞭解人類交易從以物易物、商品貨幣到法定紙鈔硬幣的演變歷史及其優缺點。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 掌握常見支付工具特性：儲值卡（預先存入）、信用卡（延遲預支、需警戒最高15%循環利息）與行動支付。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 建立理性消費與編列預算的觀念，懂得依據不同消費場景聰明選擇支付方式，不盲目衝動購物。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【支付的選擇】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：儲值卡、悠遊卡、信用卡、循環利息、行動支付）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">02:44 - 03:12</span><br>
+              <span class="dialogue-speaker">旁白</span>：古代市場，人們從以物易物，到用貝殼、金屬等商品貨幣來交易。為了改善數量不敷使用及攜帶不便等缺點，進一步發展出法定貨幣：紙鈔、硬幣。優勢在於交易方便，但也存在失竊、偽造等風險。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">04:37 - 05:10</span><br>
+              <span class="dialogue-speaker">旁白</span>：常見的儲值卡有悠遊卡、一卡通。需將錢預先存入卡片再進行消費，通常使用於小額支付。卡內沒有儲資金或餘額不足時，是不能進行交易的喔！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">05:40 - 06:15</span><br>
+              <span class="dialogue-speaker">旁白</span>：信用卡持卡人刷卡後，收到帳單再進行付款。需評估個人信用與財務狀況後核發最大額度。因為是預支，所以使用刷卡消費時更需注意信用額度，避免過度消費影響信譽。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">06:43 - 07:44</span><br>
+              <span class="dialogue-speaker">大寶</span>：信用卡循環利息最高可達 15% 喔！也就是說，如果沒有按時繳款的話，會造成個人信用問題，未來還會影響向金融機構貸款的金額或利率喔！<br>
+              <span class="dialogue-speaker">幼幼</span>：要小心過度消費，新聞上還說要注意詐騙集團使用銀行名義，切勿輕易相信或點來路不明連結。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">07:46 - 08:18</span><br>
+              <span class="dialogue-speaker">旁白</span>：行動支付是指將支付工具的資訊存到手機，經申請、身分驗證、密碼設定後即可手持手機交易。例如 Apple Pay、Samsung Pay、Google Pay、台灣 Pay 等。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：支付工具知多少隨堂檢測</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。悠遊卡與一卡通等電子票證屬於「預付型儲值卡」，消費者必須先將現金存入卡片中，交易時從卡內餘額扣除，餘額不足時便無法完成結帳。">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              大寶手上的「悠遊卡」或「一卡通」屬於常見的儲值卡，其主要運作特性為何？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="pay_q1" value="A">
+                <span>(A) 可以無限透支消費，卡片內沒錢也能買幾十萬的名牌包</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q1" value="B">
+                <span>(B) 需先將金錢預先存入卡片再進行扣款消費，餘額不足時無法交易</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q1" value="C">
+                <span>(C) 每個月月底由銀行寄送帳單到家中才需要付款</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q1" value="D">
+                <span>(D) 只能在搭乘飛機到國外時使用，台灣境內無法使用</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="D" data-explanation="正解為 (D)。信用卡屬於「先享受、後付款」的信用預支工具。若只繳最低應繳金額，未清償部分將被收取高額的「循環利息」（法律規定年利率上限可達 15%），利滾利負擔極重且損害個人信用！">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              影片中大寶特別強調，如果信用卡沒有按期全額繳清帳單，可能會產生何種後果？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="pay_q2" value="A">
+                <span>(A) 銀行會主動免除所有消費欠款</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q2" value="B">
+                <span>(B) 信用卡會自動變成一張免付款的金卡</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q2" value="C">
+                <span>(C) 銀行會倒貼 15% 的獎勵金給持卡人</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q2" value="D">
+                <span>(D) 面臨高達 15% 的信用卡循環利息，並在聯徵中心留下信用瑕疵，影響未來購屋創業貸款</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="A" data-explanation="正解為 (A)。行動支付是將銀行卡、信用卡或電子帳戶資訊以加密虛擬方式綁定於手機中。雖然帶來極高的便利性，但若缺乏預算控制容易無感花費，因此養成查看交易明細與記帳至關重要。">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              阿加喜歡使用手機行動支付（如 LINE Pay、台灣 Pay），關於行動支付的敘述下列何者正確？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="pay_q3" value="A">
+                <span>(A) 是將卡片或金融帳戶資訊綁定於手機中，須配合店家支援的系統，仍須注意預算控制避免無感超支</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q3" value="B">
+                <span>(B) 只要手機有電，就能無限次向所有商家免費索取食物與飲料</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q3" value="C">
+                <span>(C) 世界上所有路邊攤或傳統小店都一定強制只能使用行動支付</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="pay_q3" value="D">
+                <span>(D) 行動支付絕對沒有密碼驗證，任何人撿到你的手機都能直接提領現金</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 支付工具大比拼 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-table-list"></i> 第二部分：支付工具特性思辨</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【生活情境分析】：影片中幼幼、大寶、阿加三人站在飲料店前，因為「現金沒帶夠」、「悠遊卡沒儲值」、「店家沒有支援 LINE Pay」而陷入尷尬場面。
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              身為國中生，若你平常出門補習或與同學出遊，你會攜帶並準備哪一種（或哪兩種）支付方式？為什麼？請說明你如何做好防掉落、防盜刷與預算控管：
+            </p>
+            <div class="reflection-box">
+              <textarea id="paymentMethodStrategy" class="reflection-textarea" placeholder="請在此說明你的支付策略與安全防護考量（例如：以學生證悠遊卡作為搭車與超商小額支付，搭配適量緊急零錢現金，並下載記帳App隨時記錄花費...）"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 手繪個人預算分配餅圖 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> 第三部分：動手畫出「我的每月零用錢金錢規劃圓餅圖」</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 請利用下方畫布，畫出一個代表你每月收入/零用錢的<strong>「圓餅圖」</strong>，並劃分出<strong>「必要支出（餐飲交通）」、「儲蓄累積（存入撲滿/郵局）」、「自我投資（書籍學習）」與「休閒想要（娛樂）」</strong>的理想比例！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 一般鋼筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="2">細 (2px)</option>
+              <option value="5" selected>適中 (5px)</option>
+              <option value="12">粗 (12px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="經典黑"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="科技藍"></div>
+            <div class="color-swatch" data-color="#10b981" style="background-color: #10b981;" title="儲蓄綠"></div>
+            <div class="color-swatch" data-color="#f59e0b" style="background-color: #f59e0b;" title="醒目黃"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#ec4899" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-chart-pie"></i> 預算規劃圓餅圖創作畫布
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-lightbulb"></i> 第四部分：學習心得與理性消費者宣言</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              現代支付越來越方便（只要嗶一聲或手機掃描），但也常常讓人花錢「無痛感」。請寫下一句送給自己的「理性消費座右銘」，並分享本單元對你金錢觀的啟發：
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的理性消費宣言與心得（至少 30 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_payment_choice');
+      WorksheetExporter.setupExportButtons('支付的選擇-金錢規劃（國中）');
+    });
+  </script>
+</body>
+</html>

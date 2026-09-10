@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>理財成長記-借貸與信用（國小） - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-handshake-simple"></i> 理財成長記-借貸與信用（國小）
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-elementary"><i class="fa-solid fa-child-reaching"></i> 國小階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-hand-holding-heart"></i> 借貸與信用</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：理財成長記（想要與需要、借錢與守信約定）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010260100000000000&type=Doc&PKID=5e4df4eb-eeb0-4193-9ddf-caba06472600" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立國小">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：五年三班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 學會辨別生活中的「需要（日常生活必需品）」與「想要（慾望與流行愛好）」。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 理解借錢需要承擔還款的責任與壓力，建立「量入為出、儲蓄圓夢」的健康金錢習慣。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 體會「信用是做人一輩子的無價之寶」，養成說話算話、有借有還的好品格。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【理財成長記】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：螢光筆、鉛筆盒、借錢、零用錢、信用）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">00:27 - 00:49</span><br>
+              <span class="dialogue-speaker">姐姐（大寶）</span>：小威，你看這隻螢光筆剛好可以用來替換我沒水的那一隻。加上上個月的零用錢我有存起來一些，剛好可以用來買這隻筆！<br>
+              <span class="dialogue-speaker">小威</span>：姐姐，我想買這個鉛筆盒，可是我的錢不夠，你可以先借我錢嗎？很帥啦，反正我就是想要啦！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">00:52 - 01:20</span><br>
+              <span class="dialogue-speaker">姐姐</span>：小威，這個價格……是我們兩個月的零用錢欸！而且如果我借你的話，你打算怎麼還我？<br>
+              <span class="dialogue-speaker">小威</span>：我會把之後兩個月的零用錢都給你。<br>
+              <span class="dialogue-speaker">姐姐</span>：停！我覺得我們先回家跟爸媽討論一下，因為借錢可不是件小事，還會影響你之後的零用錢使用，而且我們也要一起討論購買這個鉛筆盒的必要性！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">01:42 - 02:30</span><br>
+              <span class="dialogue-speaker">媽媽</span>：小威，如果跟姐姐借了錢，接下來兩個月如果遇到學校要買文具，你身上就沒有任何零用錢可以使用囉！<br>
+              <span class="dialogue-speaker">爸爸</span>：如果真的很喜歡，可以每週存下一點點錢，等存夠了再來買，這樣既不會負債，也能體會珍惜物品的快樂！
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：理財觀念是非選擇題</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。姐姐買螢光筆是因為原本的沒水了，屬於上課學習的「需要」；小威原本就有堪用的文具盒，純粹因為外型酷炫很帥而想買，屬於心裡的「想要」。">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              影片一開始，姐姐用存下的零用錢買替換的「螢光筆」，小威卻想買酷炫的「鉛筆盒」。請問這兩者在金錢觀念上分別屬於什麼？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="grow_q1" value="A">
+                <span>(A) 兩者都是不需要的浪費行為</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q1" value="B">
+                <span>(B) 姐姐的筆沒水了是「需要」，小威因為覺得帥氣想買是「想要」</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q1" value="C">
+                <span>(C) 小威的鉛筆盒是「需要」，姐姐的螢光筆是「想要」</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q1" value="D">
+                <span>(D) 只要跟家人借錢，所有東西都會自動變成「需要」</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。跟別人借錢消費，等於預支了未來的零用錢。在未來的幾個月裡，你將無法自由支配自己的金錢，萬一遇到急需或更想做的事就會捉襟見肘！">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              如果小威真的跟姐姐借了「相當於兩個月零用錢」的金額買下鉛筆盒，接下來兩個月會發生什麼事？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="grow_q2" value="A">
+                <span>(A) 他的零用錢會莫名其妙變成原來的兩倍</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q2" value="B">
+                <span>(B) 學校的考試成績會自動拿滿分</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q2" value="C">
+                <span>(C) 未來兩個月一領到零用錢都必須拿去還債，自己身上將完全沒有零用錢可用</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q2" value="D">
+                <span>(D) 鉛筆盒會每天自動長出新文具</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="A" data-explanation="正解為 (A)。「有借有還，再借不難」，守信用代表一個人誠實負責。若隨便借錢不還或找藉口拖延，同學與朋友將不再信任你，失去珍貴的友誼與信譽。">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              常言道「有借有還，再借不難」，這句話告訴我們在借貸與做人處事上最重要的核心品質是什麼？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="grow_q3" value="A">
+                <span>(A) 「信用」與「誠實」：答應還錢的時間一定要說話算話，維護彼此的信任</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q3" value="B">
+                <span>(B) 借了錢之後只要假裝忘記就不用還</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q3" value="C">
+                <span>(C) 只要借錢的時候聲音夠大聲就不算負債</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="grow_q3" value="D">
+                <span>(D) 只有別人欠我錢，我絕對不能還別人錢</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 生活情境大挑戰 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-comments"></i> 第二部分：我的零用錢儲蓄計畫大考驗</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【我的零用錢練習】：如果你每個禮拜有 50 元零用錢，你非常想買一本定價 200 元的科學漫畫書。
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              你會選擇「向同學或兄弟姊妹借 200 元馬上買」，還是「自己每週存下一部分零用錢慢慢買」？請寫出你的選擇，並算出你打算每週存多少錢？需要存幾週才能買到這本書？
+            </p>
+            <div class="reflection-box">
+              <textarea id="savingPlanExplanation" class="reflection-textarea" placeholder="例如：我會選擇自己存錢。我每週有 50 元，我打算每週存 25 元在撲滿裡（剩下的 25 元當作平時需要用的小零用錢），這樣我只要存 8 週（大約兩個月），就能靠自己的努力買下漫畫書！很有成就感！"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 動手畫出我的願望撲滿 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-paintbrush"></i> 第三部分：動手畫出「我的夢想撲滿」與「信用小達人守則」</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 小朋友，請拿出你的創意畫筆！在下方畫布上畫出你最喜歡的<strong>「神奇存錢罐或小動物撲滿」</strong>，並在旁邊寫下一句你的<strong>「守信用小承諾」</strong>（例如：準時還錢、說到做到）！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 彩色筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="3">細 (3px)</option>
+              <option value="6" selected>中等 (6px)</option>
+              <option value="14">粗 (14px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="黑色"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="天藍"></div>
+            <div class="color-swatch" data-color="#dc2626" style="background-color: #dc2626;" title="蘋果紅"></div>
+            <div class="color-swatch" data-color="#16a34a" style="background-color: #16a34a;" title="草地綠"></div>
+            <div class="color-swatch" data-color="#f59e0b" style="background-color: #f59e0b;" title="亮黃色"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#ec4899" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-palette"></i> 夢想撲滿創作天地
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-star"></i> 第四部分：我的理財成長小日記</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              看完小威和姐姐的故事後，請寫下一句你在這堂課學到的話，並告訴爸爸媽媽你未來打算怎麼使用零用錢：
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的心得小日記（至少 25 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_grow_finance');
+      WorksheetExporter.setupExportButtons('理財成長記-借貸與信用（國小）');
+    });
+  </script>
+</body>
+</html>

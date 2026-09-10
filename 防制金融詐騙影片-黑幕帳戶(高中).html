@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防制金融詐騙影片-黑幕帳戶(高中) - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-triangle-exclamation"></i> 防制金融詐騙影片-黑幕帳戶(高中)
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-senior"><i class="fa-solid fa-graduation-cap"></i> 高中階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-gavel"></i> 防制金融詐騙</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：黑幕帳戶（求職兼職詐騙、人頭帳戶與洗錢防制刑責）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010280103000000000&type=Doc&PKID=b478c9f3-56ec-407d-9319-58309c3700c2" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立高中">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：三年一班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 認清求職打工「日領高薪、轉帳代收代匯」的詐騙陷阱，牢記絕不出借個人金融帳戶與存摺提款卡。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 深入理解《洗錢防制法》與《刑法詐欺罪》連帶法律刑責，明瞭人頭帳戶遭列警示帳戶對一生的嚴重衝擊。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 熟練青少年安全求職「三備七不」法則，建立警覺心，避免因一時貪念淪為詐騙集團的犯罪免洗筷。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【黑幕帳戶】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：轉帳、凍結、人頭帳戶、洗錢、免洗筷）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">01:33 - 02:28</span><br>
+              <span class="dialogue-speaker">男主角</span>：哇！轉帳成功！手續費三百塊！我根本天生的打工仔呀！再這樣賺下去，錢就會一直滾進來……蛤？欸？凍、凍結？！怎麼辦？我可不想被抓去關哪……
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">03:01 - 03:33</span><br>
+              <span class="dialogue-speaker">女主角</span>：你交出個人帳戶資訊，就是讓詐騙集團用你的名義去犯罪！詐騙集團把來路不明的錢轉進你的帳戶，再將你帳戶的錢轉進他們的帳戶，這就是洗錢。銀行查不到來源，所以你不但是人頭帳戶，還是洗錢的幫凶。詐騙集團根本就把你當作免洗筷，用完就丟！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">04:19 - 04:40</span><br>
+              <span class="dialogue-speaker">詐騙首腦</span>：那小子天真地問我是不是合法打工，我跟他說是他就信了！哈哈哈哈……<br>
+              <span class="dialogue-speaker">詐騙首腦（唱歌）</span>：轉帳收款超簡單～日領現金好輕鬆～帳戶名字是你的～啊犯罪紀錄也歸你～～！
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：人頭帳戶與洗錢法律隨堂測驗</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。出租、出借或提供存摺、提款卡及密碼給他人轉帳，將觸犯《洗錢防制法》第15條之2（人頭帳戶罪）以及刑法幫助詐欺取財罪，面臨刑事判刑及全額連帶民事賠償責任！">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              影片中男主角將自己的銀行帳戶交給他人協助轉帳賺取手續費，在法律上屬於何種嚴重的犯罪行為？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="dark_q1" value="A">
+                <span>(A) 合法自食其力的優良青年打工典範</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q1" value="B">
+                <span>(B) 淪為詐騙集團「人頭帳戶」及「洗錢犯罪幫兇」，面臨刑事有期徒刑與龐大民事求償</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q1" value="C">
+                <span>(C) 只要聲稱自己不知情，法院就會無條件頒發清白獎金</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q1" value="D">
+                <span>(D) 只是幫阿嬤開戶，不需要負擔任何法律責任</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。一旦被警方列為「警示帳戶」，名下所有帳戶功能（網銀轉帳、ATM提款、行動支付）將被全面暫停凍結，聯徵中心通報全台金融機構，日後求職無法入帳，信用終身受損。">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              男主角的銀行帳戶被列為「警示帳戶並全面凍結」，在日常生活與金融生活上會造成何種連鎖打擊？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="dark_q2" value="A">
+                <span>(A) 銀行會立刻免費幫他升級為無限黑卡</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q2" value="B">
+                <span>(B) 只是不能買偶像小卡，對其他金融交易完全沒影響</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q2" value="C">
+                <span>(C) 名下所有金融帳戶遭全面停止交易，無法領錢、無法匯款，日後連正當打工的薪資都無法開戶入帳</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q2" value="D">
+                <span>(D) 警察局會主動幫忙代繳所有水電費</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="D" data-explanation="正解為 (D)。求職「七不原則」明確規範：不繳錢、不購買、不辦卡、不簽約、證件不離身、不非法工作、不飲用不明飲料。正當公司絕不會在錄取前要求交出存摺金融卡與提款密碼！">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              高中生利用課餘或寒暑假應徵打工，下列何種情況「絕對是詐騙集團的人頭帳戶陷阱」？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="dark_q3" value="A">
+                <span>(A) 公司要求攜帶履歷表到實體辦公室進行面試</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q3" value="B">
+                <span>(B) 依勞基法規定投保勞工保險與全民健保</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q3" value="C">
+                <span>(C) 宣導合法工時與基本時薪計算方式</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="dark_q3" value="D">
+                <span>(D) 宣稱工作極輕鬆可日領數千，要求先寄出「存摺、提款卡與密碼」或協助將不明款項領出轉匯</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 人頭帳戶代價思辨題 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-gavel"></i> 第二部分：免洗筷效應與求職安全思辨</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【免洗筷深度剖析】：詐騙首腦唱著：「轉帳收款超簡單，日領現金好輕鬆，帳戶名字是你的，犯罪紀錄也歸你！」
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              為什麼女主角會將人頭帳戶形容為「免洗筷」？如果你的同學或好友正在考慮「只要把空存摺借給別人幾天就有幾千元租金」，你會如何用本片學到的法律與現實代價勸阻他？
+            </p>
+            <div class="reflection-box">
+              <textarea id="disposableChopsticksAnalysis" class="reflection-textarea" placeholder="請在此說明免洗筷效應與法律嚴重後果（例如：詐騙集團拿了錢就跑，所有金流都登記在人頭名下，警方第一個抓的就是你！你賺幾千元手續費，卻要賠償受害人幾百萬...）"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 動手畫出求職防護心智圖 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-clipboard-check"></i> 第三部分：動手繪製「青年安全打工『三備七不』安全防護檢核圖」</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 請在下方畫布上，繪製出你的<strong>「安全打工防護心智圖」</strong>或<strong>「絕不出借存摺金融卡誓約卡」</strong>！運用色彩標記出面試時的<strong>「紅色禁區（不繳錢、不辦卡、不交存摺）」</strong>與<strong>「綠色安全指標」</strong>！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 一般鋼筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="2">細 (2px)</option>
+              <option value="5" selected>適中 (5px)</option>
+              <option value="12">粗 (12px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="經典黑"></div>
+            <div class="color-swatch" data-color="#dc2626" style="background-color: #dc2626;" title="警示紅"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="安全藍"></div>
+            <div class="color-swatch" data-color="#10b981" style="background-color: #10b981;" title="合規綠"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#f59e0b" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-clipboard-check"></i> 安全求職檢核防護畫布
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-scale-balanced"></i> 第四部分：學習心得與法律自律承諾</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              即將邁入成年的高中生，個人銀行帳戶將伴隨我們一輩子。請寫下你看完【黑幕帳戶】後的最大震撼，並鄭重寫下你的「金融自律承諾書」：
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的金融自律承諾（例如：我承諾絕不出租、借用或販售個人存摺金融卡，求職堅持三備七不，保護自己的清白與信用...）"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_dark_account');
+      WorksheetExporter.setupExportButtons('防制金融詐騙影片-黑幕帳戶(高中)');
+    });
+  </script>
+</body>
+</html>

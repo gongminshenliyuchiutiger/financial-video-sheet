@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家的撲滿-理財投資（國中） - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-piggy-bank"></i> 家的撲滿-理財投資（國中）
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-junior"><i class="fa-solid fa-user-graduate"></i> 國中階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-chart-line"></i> 理財投資</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：家的撲滿（儲蓄、理財與投資自己）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010260200000000000&type=Doc&PKID=12016b40-13f9-4b82-9ba7-cb2b57ffe120" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立國中">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：八年一班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 體會「滿則撲之」的儲蓄精神，認識將錢存放於合法金融機構（銀行、郵局）能生息且享有法定存款保障。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 建立健全的理財第一步：釐清「需要」與「想要」的差異，量入為出並備妥緊急備用金。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 牢記「天下沒有穩賺不賠」的鐵律，高報酬必定伴隨高風險，並領會「在求學時期投資自己是最好的投資」。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【家的撲滿】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：滿則撲之、利息、投資自己、穩賺不賠、卡牌）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">01:19 - 01:37</span><br>
+              <span class="dialogue-speaker">爸爸</span>：「滿則撲之」，這是撲滿名稱的由來。意思就是說，等它滿了，就打破它。撲滿就是存錢筒。早期經濟狀況比較不好，每天存一點銅板，看著撲滿慢慢變滿，內心就會有一種幸福感。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">02:16 - 02:35</span><br>
+              <span class="dialogue-speaker">爸爸</span>：錢就是要存在合法的金融機構，例如郵局、銀行，這樣才能夠生利息，也才能夠得到合法的保障喔。<br>
+              <span class="dialogue-speaker">媽媽</span>：透過儲蓄累積資金，不僅可以滿足生活所需，也可以參與一些適當的理財投資活動，來增加收入喔！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">02:46 - 02:58</span><br>
+              <span class="dialogue-speaker">建智</span>：首先第一步，就是要先培養好儲蓄的習慣對不對？當我們想要某個東西，手上的資源卻有限時，這時候就要先分清楚什麼是需要、什麼是想要，然後再來控制好自己的花費。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">03:52 - 04:18</span><br>
+              <span class="dialogue-speaker">阿加</span>：我想做一隻戴帽子的小熊送給我哥當生日禮物，也想說如果有一技之長，之後也許可以多一個工作的選擇！而且我的學費是用記帳的方式來自己支付的！<br>
+              <span class="dialogue-speaker">裁縫老師</span>：哇，小小年紀就懂得投資自己，這是很好的理財投資觀念喔！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">05:39 - 06:48</span><br>
+              <span class="dialogue-speaker">阿芳（電話）</span>：卡牌你知道吧？我一千塊買進，等漲到一萬塊的時候賣出，穩賺不賠喔！你要不要一起？<br>
+              <span class="dialogue-speaker">建智</span>：不太可能有高報酬卻沒有風險的投資啦，任何投資都是有風險的喔。盲目投資的話連本金都會賠掉，甚至還有買賣卡牌被詐騙的！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">06:59 - 07:30</span><br>
+              <span class="dialogue-speaker">爸爸</span>：不要因為高報酬，就把所有的錢拿去做高風險投資。投資都一定有風險，這世界上沒有穩賺不賠的事情。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">10:03 - 10:37</span><br>
+              <span class="dialogue-speaker">爸爸</span>：理財不僅僅是存錢或投資，它更是對生活的管理。平衡收入跟支出，我們家裡面的每一份儲蓄跟關心，也都是有形跟無形的資產，累積下來就有一個大大的幸福撲滿！
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：儲蓄與投資觀念隨堂測驗</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。「滿則撲之」即裝滿就打破取出，是撲滿（存錢筒）的由來。此外，現代將金錢存放於合法銀行或郵局，受中央存款保險公司的法定保障，且能定期生息，比起放在家中更安全。">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              影片中爸爸解釋「撲滿」名稱由來為「滿則撲之」，下列關於儲蓄方式的說明何者最正確？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="p_q1" value="A">
+                <span>(A) 存放在地毯下或枕頭裡最安全，完全不需要考慮失竊或火災風險</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q1" value="B">
+                <span>(B) 存錢於合法金融機構（如郵局、銀行）能享有法定存款保障並賺取利息</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q1" value="C">
+                <span>(C) 只要一拿到零用錢，就應該全部花光以刺激經濟</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q1" value="D">
+                <span>(D) 撲滿只能用來裝灰塵，完全不具備培養延遲享樂的儲蓄價值</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。任何金融投資必有風險！「高報酬、零風險、保證穩賺不賠」是常見的金融詐騙宣傳話術。投資前必須先評估個人風險承擔能力，千萬不能把生活開銷或借貸資金孤注一擲。">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              當朋友向建智推銷：「這個限量卡牌一千買進、等漲到一萬賣出，穩賺不賠！」建智當場拒絕。建智的觀念為何正確？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="p_q2" value="A">
+                <span>(A) 因為建智討厭收集卡牌</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q2" value="B">
+                <span>(B) 他想等漲到十萬才願意合夥</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q2" value="C">
+                <span>(C) 天下沒有「穩賺不賠且高報酬」的投資，所有投資皆有風險，盲目跟風可能連本金都賠光甚至被詐騙</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q2" value="D">
+                <span>(D) 只有成年人買卡牌才會賺錢，學生買一定會賠</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="A" data-explanation="正解為 (A)。在求學階段，好好充實專業知識與多元技能（如外語、資訊技能、手工藝或跨領域素養），能使未來的自己擁有更多元的選擇與較佳的收入潛力，是最穩健且報酬無窮的「投資自己」！">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              阿加利用假日自費學習裁縫手作，裁縫老師稱讚這是「投資自己」。下列何者屬於國中生「投資自己」的最佳體現？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="p_q3" value="A">
+                <span>(A) 在求學階段認真學習知識技能、培養一技之長與自律習慣，提升未來價值</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q3" value="B">
+                <span>(B) 每天花光所有零用錢購買最新款手機遊戲虛擬造型</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q3" value="C">
+                <span>(C) 把午餐費省下來去借貸買地下期貨</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="p_q3" value="D">
+                <span>(D) 跟同學四處借錢去買名牌球鞋炫耀</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 分辨需要 vs 想要 思辨題 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-scale-unbalanced-flip"></i> 第二部分：生活中「需要」與「想要」的辨析</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【生活實踐題】：建智說：「理財的第一步，就是分清楚什麼是需要、什麼是想要。」
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              請檢視你最近一個月的一筆花費（或目前最渴望購買的一樣物品）。請寫出該物品名稱，並詳細分析它是你的「需要」（生活必需）還是「想要」（慾望渴望）？如果目前手頭預算有限，你會如何做出理性選擇？
+            </p>
+            <div class="reflection-box">
+              <textarea id="needsVsWantsAnalysis" class="reflection-textarea" placeholder="例如：我最近想買一雙新球鞋。分析：我原本的鞋子還能穿，因此買名牌新鞋屬於『想要』而非『需要』。我決定先存下零用錢的三分之一..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 設計我的幸福撲滿 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-palette"></i> 第三部分：動手畫出「我的夢想幸福撲滿」與投資自己計畫</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 早期的人用陶土撲滿，現代你可以發揮想像力！請在下方畫布上，繪製出你心目中的<strong>「專屬撲滿外型」</strong>（例如機器人、小動物或智能金庫），並用文字標註你打算在裡面累積的<strong>「儲蓄目標」</strong>與<strong>「想要投資自己學會的一項新技能」</strong>！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 一般鋼筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="2">細 (2px)</option>
+              <option value="5" selected>適中 (5px)</option>
+              <option value="12">粗 (12px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="經典黑"></div>
+            <div class="color-swatch" data-color="#0d9488" style="background-color: #0d9488;" title="翡翠綠"></div>
+            <div class="color-swatch" data-color="#f59e0b" style="background-color: #f59e0b;" title="金幣黃"></div>
+            <div class="color-swatch" data-color="#ec4899" style="background-color: #ec4899;" title="溫暖粉"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#3b82f6" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-piggy-bank"></i> 我的幸福撲滿設計畫布
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-heart"></i> 第四部分：學習心得與家庭資產體會</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              片尾爸爸說：「我們家裡面的每一份儲蓄跟關心，也都是有形跟無形的資產。」除了金錢之外，你認為在你的家庭生活中，有哪些無可取代的「無形資產」？
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的心得體悟（至少 30 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_piggy_bank');
+      WorksheetExporter.setupExportButtons('家的撲滿-理財投資（國中）');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防制金融詐騙影片-流量陷阱(國中) - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-user-shield"></i> 防制金融詐騙影片-流量陷阱(國中)
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-junior"><i class="fa-solid fa-user-graduate"></i> 國中階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-triangle-exclamation"></i> 防制金融詐騙</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：流量陷阱（網紅批貨、私下匯款陷阱與合法電商辨識）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010280101000000000&type=Doc&PKID=4580d761-6a4d-46e6-a517-3f892a940cf7" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立國中">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：八年四班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 揭露社群媒體上「私下匯款、幽靈批貨、假開團」之網路詐騙手法與特徵。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 學會辨識合法購物網站四大關鍵要素：客服電話、公司統編、明確退換貨規則與第三方履約保證。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 克服青少年對社群流量與點讚數的盲目焦慮，建立健康的自我認同，懂得與家長師長溝通求助。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【流量陷阱】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：批貨、匯款、報紙、統編、客服）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">02:07 - 02:36</span><br>
+              <span class="dialogue-speaker">小紫</span>：前幾天看到一個批貨網頁感覺超划算，他說庫存有限要我先匯錢給他，但我等了超久都沒有收到，現在那個網站也不見了！<br>
+              <span class="dialogue-speaker">多多</span>：小紫你是直接匯款喔？那超詐的啊！我之前也被騙過，結果只寄來報紙耶。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">03:11 - 03:41</span><br>
+              <span class="dialogue-speaker">媽媽</span>：正常的購物網站都會有客服電話、公司統編，還會寫清楚退換貨的規則。想紅沒什麼不好，但別自己一頭栽進去嘛。下次如果想開團，記得先找我們兩個金牌經紀人討論一下！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">03:43 - 04:45</span><br>
+              <span class="dialogue-speaker">小紫</span>：我一開始以為只要有人按愛心就是真的被看見了，可是連我都忘了自己真正喜歡的是什麼。<br>
+              <span class="dialogue-speaker">小紫（旁白）</span>：如果你也想跟我一樣，希望在網路上被看見，那你一定要更小心社交媒體上的陷阱。真正的讚不需要刷存在感，就在我們身邊。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：網路防詐與網購安全隨堂測驗</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。詐騙集團常在社群發布低於市價的廣告，以「限時限量、即將售罄」營造急迫感，要求買家私下加入通訊軟體直接匯款，收到款項後便封鎖消失或寄送廢紙、磚頭！">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              小紫在網路上遭遇的「假批貨開團詐騙」，最典型的詐騙特徵與手法是什麼？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="trap_q1" value="A">
+                <span>(A) 提供實體店面讓你現場試穿並開立正式統一發票</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q1" value="B">
+                <span>(B) 先寄送合格貨品讓你試用滿意後才付款</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q1" value="C">
+                <span>(C) 以超低行情價格吸引，宣稱庫存有限催促直接轉帳私下匯款，匯款後失聯斷訊</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q1" value="D">
+                <span>(D) 主動通報消基會與消保官到場監督交易</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。影片中媽媽清楚說明，合法正規的電商購物網站應具備：公司統編（可在經濟部工商登記查詢）、真實客服聯絡電話、退換貨規範及安全的履約保證平台。">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              媽媽提醒小紫，要辨識一個網路賣場或購物網站是否合法正規，應該檢視下列哪些關鍵資訊？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="trap_q2" value="A">
+                <span>(A) 只看賣家大頭貼是不是漂亮美女或帥哥照片</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q2" value="B">
+                <span>(B) 網站是否載明公司統一編號、真實客服電話與地址、明確的退換貨政策</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q2" value="C">
+                <span>(C) 留言區是不是充滿很多奇怪帳號刷一排愛心</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q2" value="D">
+                <span>(D) 網站背景音樂是否很好聽</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="D" data-explanation="正解為 (D)。網路「私下匯款交易」缺乏大型電商平台的價金保管與糾紛申訴保障機制。若私訊匯款，一旦賣家捲款潛逃，極難追回款項。">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              在社群平台（如 IG、FB、TikTok）購物時，賣家要求「私下加 LINE 匯款享有免手續費與額外折扣」，我們應該如何應對？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="trap_q3" value="A">
+                <span>(A) 毫不猶豫立刻轉帳，因為可以撿便宜</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q3" value="B">
+                <span>(B) 把自己的提款卡密碼直接傳給對方</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q3" value="C">
+                <span>(C) 幫對方轉發給所有同班同學一起購買</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="trap_q3" value="D">
+                <span>(D) 提高警覺並拒絕私下交易！堅持使用具價金保管的第三方知名電商平台，有疑慮撥打 165 求證</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 流量焦慮與自我認同思辨題 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-heart-crack"></i> 第二部分：社群焦慮與自我價值觀思辨</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【社群心理深度思辨】：小紫感嘆：「我一開始以為只要有人按讚、叫我女神，就是真的被看見了。但連我都忘了自己真正喜歡的是什麼。」
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              你或身邊的同儕是否也曾在社群媒體上因為「愛心數太少」、「沒有人留言」而感到失落或焦慮？請寫下你認為該如何看待社群網路上的虛擬讚數？身邊有哪些真實的人事物更值得我們去珍惜？
+            </p>
+            <div class="reflection-box">
+              <textarea id="socialAnxietyReflection" class="reflection-textarea" placeholder="請在此抒發你的想法（例如：社群按讚只是一時的演算法泡沫，不代表一個人真正的價值。家人的關心、朋友面對面的相處，以及自己真心熱愛的事物才是最真實的...）"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 動手設計防詐安全徽章 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-shield-virus"></i> 第三部分：動手繪製「校園網購防詐安全安全徽章 (Anti-Fraud Badge)」</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 請在下方畫布上，設計一個<strong>「反對私下匯款、小心幽靈詐騙」的防詐宣導安全徽章或標語插圖</strong>！包含關鍵警語（如：查統編、找客服、勿私匯、撥165），發揮你的繪圖設計才華！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 一般鋼筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="2">細 (2px)</option>
+              <option value="5" selected>適中 (5px)</option>
+              <option value="12">粗 (12px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="經典黑"></div>
+            <div class="color-swatch" data-color="#dc2626" style="background-color: #dc2626;" title="警示紅"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="安全藍"></div>
+            <div class="color-swatch" data-color="#f59e0b" style="background-color: #f59e0b;" title="警告黃"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#10b981" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-shield-virus"></i> 防詐宣導安全徽章畫布
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-comment-dots"></i> 第四部分：學習心得與生活防詐承諾</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              小紫最後說：「真正的讚不需要刷存在感，就在我們身邊。」看完影片後，若未來你在網路上看到超吸引人的打折活動或兼職代購，你將會先執行哪三個求證步驟？
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的三個求證步驟與心得體會（至少 30 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_flow_trap');
+      WorksheetExporter.setupExportButtons('防制金融詐騙影片-流量陷阱(國中)');
+    });
+  </script>
+</body>
+</html>

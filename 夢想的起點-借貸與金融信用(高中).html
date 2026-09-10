@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>夢想的起點-借貸與金融信用(高中) - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-book-open-reader"></i> 夢想的起點-借貸與金融信用(高中)
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-senior"><i class="fa-solid fa-graduation-cap"></i> 高中階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-scale-balanced"></i> 借貸與金融信用</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：夢想的起點（就學貸款與信用評估）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010260300000000000&type=Doc&PKID=68ff40b9-7b0c-4beb-a928-8407f65f2f2b" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立高中">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：二年三班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 理解政府就學貸款是政策性貸款，認識其申請資格、對保應備文件與承貸銀行機制。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 建立「還款能力」與「個人信用資產」之概念，清楚認知按期還款對個人長期財務發展之重要性。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 學習盤點個人的收支明細，量入為出，拒絕非法代辦，讓合法借貸成為實現生涯夢想的助力。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【夢想的起點】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：利息、臺灣銀行、富邦、戶籍謄本、還款）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">00:25 - 00:34</span><br>
+              <span class="dialogue-speaker">建智</span>：我在想，上大學之後除了有學費要繳，還有日常開銷的生活費，只靠打工真的有辦法支撐嗎？
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">01:21 - 01:40</span><br>
+              <span class="dialogue-speaker">爸爸</span>：年輕人，別擔心，你可以考慮申請就學貸款啊。針對就學貸款辦理的銀行，全台灣都可以到臺灣銀行辦理。而除了臺灣銀行以外，台北市可以另外到富邦銀行申辦，高雄市則可以到高雄銀行還有土地銀行申辦喔！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">01:57 - 02:24</span><br>
+              <span class="dialogue-speaker">媽媽</span>：我們會請學校確認申請學生的家庭年所得，只要符合資格即可申請就學貸款。就學貸款不會直接全數交給學生，而是由銀行直接撥款給學校。額度不只有學雜費，還可以另外申請住宿費、書籍費以及生活費。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">03:05 - 03:22</span><br>
+              <span class="dialogue-speaker">媽媽</span>：第一次辦理，會需要您和連帶保證人的身分證、印章，還有學生註冊繳費單，以及對保日前三個月內的全戶戶籍謄本，與就學貸款申請書。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">04:02 - 04:22</span><br>
+              <span class="dialogue-speaker">媽媽</span>：若家庭年所得在120萬以下，有提供利息減免政策。還款時間是在您畢業一年之後才開始，因此要特別注意提升自己的還款能力喔。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">05:56 - 06:22</span><br>
+              <span class="dialogue-speaker">媽媽</span>：如果你沒有按時還款導致欠款，就會成為不守信用的人。未來銀行就不願再借款或延長還款時間。信用是無形的資產，當信用不好，會導致未來需要緊急預備金或是買車買房時貸款不過或利率很高！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">08:26 - 08:35</span><br>
+              <span class="dialogue-speaker">爸爸</span>：記得不要透過代辦公司來申請，自己要做足評估，並且仔細閱讀貸款契約內容。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：金融信用隨堂檢測</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。依教育部規定，全台多數大專院校承貸銀行為臺灣銀行；台北市轄屬學校為台北富邦銀行；高雄市學校則可至高雄銀行或土地銀行申辦。">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              影片中爸爸提到，如果建智要申辦「就學貸款」，下列關於承辦銀行的敘述何者正確？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="q1" value="A">
+                <span>(A) 只能隨意找路邊的民間地下錢莊或代辦代書申辦</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="B">
+                <span>(B) 全台主要可到臺灣銀行，台北市學校可到富邦銀行，高雄市可到高雄銀行或土地銀行</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="C">
+                <span>(C) 任何便利商店的 ATM 只要插金融卡就可以直接辦理</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="D">
+                <span>(D) 只有考試成績全校第一名才能申請，與承貸銀行無關</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。就學貸款是由銀行直接撥付學校充抵學雜費，若有核准住宿費、書籍費或生活費，才由學校扣除學費後發還學生，並非全額匯入學生個人戶頭供自由揮霍。">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              關於就學貸款的「撥款方式與項目」，下列敘述何者符合規定？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="q2" value="A">
+                <span>(A) 銀行會把所有貸款現金直接裝在信封袋發給學生隨意花費</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="B">
+                <span>(B) 只能用來購買昂貴名牌衣服與最新款智慧型手機</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="C">
+                <span>(C) 由銀行直接撥款給學校支付學雜費，若有住宿費、書籍費等合格項目再由學校轉發</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="D">
+                <span>(D) 一旦申請就學貸款，畢業後永遠不需要歸還本金</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="D" data-explanation="正解為 (D)。個人信用是重要的無形資產！在聯徵中心留下信用卡遲繳或就貸欠款紀錄，會導致信用評分驟降，未來成家立業申辦房貸、車貸都會面臨被拒絕或負擔極高利率的苦果。">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              媽媽告誡建智：「信用是無形的資產。」若未來長期忽視還款責任、屢次遲繳信用卡或就學貸款，會造成什麼嚴重後果？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="q3" value="A">
+                <span>(A) 完全沒有任何影響，反正銀行很快就會忘記</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="B">
+                <span>(B) 銀行會主動寄送免費小禮物獎勵你</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="C">
+                <span>(C) 信用額度會自動加倍提升</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="D">
+                <span>(D) 聯徵信用紀錄不良，未來申請信用卡、購屋房貸與創業貸款可能遭拒或承擔極高懲罰利率</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 情境思辨問答 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-comments"></i> 第二部分：銀行授信情境思辨題</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【情境模擬】：在影片中，爸媽扮演「年收入60萬、信用良好全額繳清的水電師傅」與「年收入45萬、已有100萬房貸想再借信貸的烘焙師」。
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              若你今天是銀行的放款審核專員，你會優先核貸給哪一位？請說明你評估兩者「還款能力」、「既有負債比率」與「信用自律習慣」的判斷理由：
+            </p>
+            <div class="reflection-box">
+              <textarea id="scenarioReasoning" class="reflection-textarea" placeholder="請在此輸入你的思辨分析與理由（例如：評估借款人的年收入水準、既有負債月負擔比、過往繳款是否全額準時等因素）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 手繪學習作答區 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-paintbrush"></i> 第三部分：我的收支與夢想還款心智圖（動手繪圖寫字區）</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 請運用下方繪圖筆刷工具，畫出你上大學後的<strong>「每月收入來源 vs 必要支出項目」</strong>圖表，或為自己設計一張<strong>「未來信用守諾承諾章」</strong>！支援觸控筆與滑鼠手寫。
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 一般鋼筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="2">細 (2px)</option>
+              <option value="5" selected>適中 (5px)</option>
+              <option value="12">粗 (12px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="經典黑"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="金融藍"></div>
+            <div class="color-swatch" data-color="#dc2626" style="background-color: #dc2626;" title="警示紅"></div>
+            <div class="color-swatch" data-color="#16a34a" style="background-color: #16a34a;" title="安全綠"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#9333ea" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-signature"></i> 互動手繪與簽名區
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-feather-pointed"></i> 第四部分：學習心得與自我理財承諾</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              建智在片尾說：「我會記得讓學貸成為實現夢想的階梯。」看完這部影片後，你對未來的「借貸」與「個人信用」有什麼新的體會？
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的心得感想（至少 30 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize drawing canvas
+      new WorksheetCanvas('worksheetCanvas', 'canvas_dream_start');
+      // Setup export buttons
+      WorksheetExporter.setupExportButtons('夢想的起點-借貸與金融信用(高中)');
+    });
+  </script>
+</body>
+</html>

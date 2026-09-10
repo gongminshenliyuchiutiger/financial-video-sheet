@@ -1,0 +1,816 @@
+/* ==========================================================================
+   金融基礎教育主題教材教學影片互動式學習單彙整系統
+   Worksheet Dedicated Stylesheet (worksheet.css)
+   ========================================================================== */
+
+/* Top Worksheet Sticky Action Bar */
+.action-bar-wrapper {
+  position: sticky;
+  top: 57px;
+  z-index: 900;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  padding: 10px 0;
+}
+
+.action-bar-container {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-action-primary {
+  background: #1e3a8a;
+  color: #ffffff;
+}
+
+.btn-action-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-action-secondary {
+  background: #0d9488;
+  color: #ffffff;
+}
+
+.btn-action-secondary:hover {
+  background: #0f766e;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-action-outline {
+  background: #ffffff;
+  color: var(--dark-text);
+  border-color: var(--border-color);
+}
+
+.btn-action-outline:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.btn-action-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.btn-action-danger:hover {
+  background: #fecaca;
+}
+
+/* ==========================================================================
+   Worksheet Paper Structure (Printable Page)
+   ========================================================================== */
+.worksheet-wrapper {
+  max-width: 1020px;
+  margin: 28px auto 64px;
+  padding: 0 24px;
+}
+
+.worksheet-paper {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border-color);
+  padding: 44px;
+  position: relative;
+}
+
+/* Header Section */
+.sheet-header {
+  border-bottom: 3px double var(--primary-color);
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+}
+
+.sheet-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.sheet-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  line-height: 1.35;
+}
+
+.sheet-meta-badges {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.video-banner-box {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.video-banner-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e3a8a;
+}
+
+.video-banner-info i {
+  font-size: 1.6rem;
+  color: #ef4444;
+}
+
+.btn-play-video {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ef4444;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+}
+
+.btn-play-video:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* Student Information Form Bar */
+.student-info-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 0.7fr 1fr 1.2fr;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.info-field-group {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-field-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--medium-text);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.info-field-input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: var(--dark-text);
+  outline: none;
+  font-weight: 600;
+  transition: border-color 0.2s;
+}
+
+input[type="date"].info-field-input {
+  padding: 6px 6px;
+  font-size: 0.85rem;
+}
+
+.info-field-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
+}
+
+/* ==========================================================================
+   Learning Objectives Box
+   ========================================================================== */
+.section-card {
+  margin-bottom: 32px;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.section-header {
+  background: #f8fafc;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i {
+  color: var(--secondary-color);
+}
+
+.section-body {
+  padding: 24px;
+}
+
+.objectives-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.objectives-list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 0.975rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+.objectives-list li i {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  color: var(--success-color);
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Transcript Collapsible & Search
+   ========================================================================== */
+.transcript-accordion {
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.transcript-summary-toggle {
+  background: #f1f5f9;
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1e293b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.transcript-summary-toggle:hover {
+  background: #e2e8f0;
+}
+
+.transcript-summary-toggle i.fa-chevron-down {
+  transition: transform 0.25s ease;
+}
+
+.transcript-summary-toggle.open i.fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.transcript-content-panel {
+  display: none;
+  padding: 20px;
+  background: #ffffff;
+  border-top: 1px solid #cbd5e1;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.transcript-search-box {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.transcript-search-box input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.transcript-search-box i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--light-text);
+}
+
+.transcript-text-viewer {
+  font-size: 0.925rem;
+  line-height: 1.8;
+  color: #334155;
+  white-space: pre-wrap;
+  font-family: Consolas, "PingFang TC", "Noto Sans TC", monospace;
+  background: #fafafa;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #f1f5f9;
+}
+
+.transcript-dialogue-item {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.dialogue-timestamp {
+  display: inline-block;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 0.775rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+}
+
+.dialogue-speaker {
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+/* ==========================================================================
+   Quiz & Interactive Questions
+   ========================================================================== */
+.question-block {
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.question-block:hover {
+  border-color: #93c5fd;
+}
+
+.question-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.q-number {
+  background: var(--primary-color);
+  color: #ffffff;
+  min-width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #334155;
+  transition: all 0.2s;
+}
+
+.option-label:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.option-label input[type="radio"],
+.option-label input[type="checkbox"] {
+  accent-color: var(--primary-color);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.option-label.selected {
+  background: #eff6ff;
+  border-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.explanation-box {
+  display: none;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.explanation-box.correct {
+  display: flex;
+  gap: 10px;
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+  color: #065f46;
+}
+
+.explanation-box.incorrect {
+  display: flex;
+  gap: 10px;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+}
+
+.btn-check-answer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  color: var(--medium-text);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-check-answer:hover {
+  background: #e2e8f0;
+  color: var(--dark-text);
+}
+
+/* Open Reflection / Essay Questions */
+.reflection-box {
+  margin-top: 12px;
+}
+
+.reflection-textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  background: #ffffff;
+  transition: border-color 0.2s;
+}
+
+.reflection-textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* ==========================================================================
+   Drawing Canvas Toolbar & Canvas Workspace
+   ========================================================================== */
+.canvas-activity-card {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.canvas-toolbar {
+  background: #1e293b;
+  color: #ffffff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.canvas-tool-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.canvas-tool-btn {
+  background: #334155;
+  color: #ffffff;
+  border: 1px solid #475569;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.canvas-tool-btn:hover {
+  background: #475569;
+}
+
+.canvas-tool-btn.active {
+  background: #3b82f6;
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.color-palette {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  transition: transform 0.15s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.2);
+}
+
+.color-swatch.active {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px #38bdf8;
+}
+
+.custom-color-input {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  background: transparent;
+}
+
+.canvas-size-select {
+  background: #334155;
+  color: #ffffff;
+  border: 1px solid #475569;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.canvas-container {
+  position: relative;
+  background: #ffffff;
+  width: 100%;
+  height: 380px;
+  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+  background-size: 20px 20px;
+  cursor: crosshair;
+  overflow: hidden;
+}
+
+.interactive-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.canvas-watermark {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 600;
+}
+
+/* Teacher / Self Evaluation & Sign Area */
+.eval-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-top: 32px;
+}
+
+.eval-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eval-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars-rating {
+  display: flex;
+  gap: 8px;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.star-btn:hover,
+.star-btn.active {
+  color: #f59e0b;
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Print / Export CSS Rules
+   ========================================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .site-header,
+  .action-bar-wrapper,
+  .site-footer,
+  .mascot-container,
+  .transcript-accordion,
+  .btn-check-answer,
+  .canvas-toolbar,
+  .btn-play-video {
+    display: none !important;
+  }
+
+  .worksheet-wrapper {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .worksheet-paper {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .canvas-activity-card {
+    border: 1px solid #000000 !important;
+    break-inside: avoid;
+  }
+
+  .question-block {
+    break-inside: avoid;
+    border: 1px solid #e5e7eb !important;
+    background: #ffffff !important;
+  }
+
+  .explanation-box {
+    display: block !important;
+  }
+
+  .interactive-canvas {
+    border: 1px solid #ccc;
+  }
+
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+}
+
+/* Mobile Worksheet Responsiveness */
+@media (max-width: 768px) {
+  .worksheet-paper {
+    padding: 24px 16px;
+  }
+  .student-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .info-field-group:last-child {
+    grid-column: span 2;
+  }
+  .sheet-title {
+    font-size: 1.4rem;
+  }
+  .sheet-title-row {
+    flex-direction: column;
+  }
+  .eval-section {
+    grid-template-columns: 1fr;
+  }
+  .canvas-container {
+    height: 280px;
+  }
+}

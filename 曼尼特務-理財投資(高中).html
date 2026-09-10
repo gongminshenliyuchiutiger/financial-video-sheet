@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>曼尼特務-理財投資(高中) - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-user-secret"></i> 曼尼特務-理財投資(高中)
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-senior"><i class="fa-solid fa-graduation-cap"></i> 高中階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-arrow-trend-up"></i> 理財投資</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：曼尼特務（通膨對策、緊急備用金與理性投資要素）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010260300000000000&type=Doc&PKID=3469ed77-d58e-40c3-9f34-cae18903549f" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立高中">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：二年五班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 瞭解通貨膨脹對購買力的實質影響，明白投資前必須至少保留 6 個月生活費作為緊急預備金。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 認清「借貸投資」的致命風險，學習股神巴菲特「借款絕不超過淨值四分之一」之嚴謹自律原則。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 掌握投資三大核心要素：本金、時間與報酬，體會透過「定期定額」與長期時間攤平市場波動的穩健之道。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【曼尼特務】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：六個月生活費、借款投資、巴菲特、本金、時間、報酬）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">01:23 - 01:40</span><br>
+              <span class="dialogue-speaker">爸爸</span>：別把所有錢都拿去投資，最好至少保留六個月生活費，以防萬一。<br>
+              <span class="dialogue-speaker">媽媽</span>：而且在投資之前，必須先評估房貸、信用卡、學貸等個人金融狀況，不然萬一需要緊急用錢，就會發生周轉不靈！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">02:27 - 03:08</span><br>
+              <span class="dialogue-speaker">媽媽（特務曼妮）</span>：投資不一定在短期之內就有回報，但是借錢每個月就要還本金加利息，要衡量是否有能力還款。<br>
+              <span class="dialogue-speaker">爸爸</span>：股神巴菲特在《雪球》這本書提到，借款最多只能是資產淨值的四分之一。連股神也十分謹慎看待借款與投資的關係！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">05:39 - 06:13</span><br>
+              <span class="dialogue-speaker">爸爸</span>：就像去夜市花一百元玩射氣球遊戲，射中許多氣球得到昂貴娃娃是投資收益；只射中一顆只有十元糖果是投資損失；一顆都沒射中一百元直接飛了，這就是本金損失！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">06:55 - 07:11</span><br>
+              <span class="dialogue-speaker">媽媽</span>：目標決定了你選擇的投資策略！投資有三大要素：本金、時間跟報酬。在短時間內想要賺大錢，風險自然就高；若是定期定額持續投資，風險都會被時間攤平。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：投資心法隨堂測驗</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。在進行任何金融投資之前，應優先存下至少 6 個月的必要生活開銷作為「緊急預備金」，防範突發失業、傷病或家庭急難，避免被迫在市場低點賤賣資產或產生周轉危機。">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              影片中爸爸叮嚀兒子，在踏入市場投資前，個人身邊最少應保留多少金額的「緊急預備金」？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="money_q1" value="A">
+                <span>(A) 只要保留一天的零錢 100 元即可</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q1" value="B">
+                <span>(B) 至少保留六個月的日常生活基本生活費</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q1" value="C">
+                <span>(C) 完全不需要留任何現金，全部借錢歐印（All-in）買股票</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q1" value="D">
+                <span>(D) 只要身邊有朋友買股票賺錢，就不用存預備金</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。股神巴菲特在傳記中強調，借款上限最多只能是資產淨值的四分之一。借錢投資需定期支付本金與利息，一旦市場波動慘賠，將面臨斷頭與龐大債務追繳的致命破產風險。">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              關於「借款投資」的風險，股神巴菲特在《雪球》一書中提出了何種借款上限建議？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="money_q2" value="A">
+                <span>(A) 借越多越好，最好借到個人資產的十倍以擴大槓桿</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q2" value="B">
+                <span>(B) 借款不能超過身上現金的 1%</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q2" value="C">
+                <span>(C) 借款最多只能是個人資產淨值的四分之一（25%）</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q2" value="D">
+                <span>(D) 只要自封為「少年股神」，就可以隨意向親友借無限額資金</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="A" data-explanation="正解為 (A)。投資三大核心要素為「本金、時間、報酬」。想要在極短時間追求暴利必然得冒本金全損的巨大風險；透過定期定額長期持續投入，時間複利是普通投資人累積財富最可靠的武器。">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              特務曼妮指出「投資有三大要素」，下列何者正確？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="money_q3" value="A">
+                <span>(A) 本金、時間、報酬</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q3" value="B">
+                <span>(B) 運氣、打扮、墨鏡</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q3" value="C">
+                <span>(C) 借貸、投機、跟風</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="money_q3" value="D">
+                <span>(D) 炫富、開團、點讚</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 射氣球與本金風險思辨題 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-calculator"></i> 第二部分：投資風險與財務目標思辨</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【生活譬喻解析】：爸爸用夜市花 100 元「射氣球遊戲」來比喻投資的三種結果（贏得大娃娃、只得小糖果、一顆都沒中本金飛了）。
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              若你目前有一筆 3 萬元的積蓄，你打算如何分配「日常生活備用金」、「無風險定存」與「長期投資（如定期定額ETF）」？假設發生市場下跌 20% 的狀況，你的心理準備與應對策略是什麼？
+            </p>
+            <div class="reflection-box">
+              <textarea id="assetAllocationStrategy" class="reflection-textarea" placeholder="請在此說明你的三萬元資產規劃與風險承受思考（例如：保留 1.5 萬為 6 個月緊急生活金，1 萬投入定期定額大盤指數，5 千放定存；即便下跌也不慌張停扣...）"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 手繪人生財務目標心智圖 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 第三部分：動手繪製「我的人生三大財務目標與資產累積時間軸」</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 特務曼妮提到「目標決定了你的投資策略」。請在下方畫布上，繪製出你從<strong>「高中/大學（短程）」、「就業青年（中程）」到「成家獨立（長程）」</strong>的財務里程碑與存錢累積目標（例如：買機車、留學進修、買房頭期款）！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 一般鋼筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="2">細 (2px)</option>
+              <option value="5" selected>適中 (5px)</option>
+              <option value="12">粗 (12px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="經典黑"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="金融藍"></div>
+            <div class="color-swatch" data-color="#10b981" style="background-color: #10b981;" title="複利綠"></div>
+            <div class="color-swatch" data-color="#f59e0b" style="background-color: #f59e0b;" title="目標黃"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#8b5cf6" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-arrow-trend-up"></i> 人生財務目標時間軸畫布
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-medal"></i> 第四部分：學習心得與曼尼特務結業心得</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              通過曼尼特務的訓練後，你對於「當少年股神」與「腳踏實地累積資產」有何觀念轉變？在未來的打工或職涯收入中，你打算如何善用「時間」這個最強大的投資盟友？
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的心得體悟（至少 30 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_agent_money');
+      WorksheetExporter.setupExportButtons('曼尼特務-理財投資(高中)');
+    });
+  </script>
+</body>
+</html>

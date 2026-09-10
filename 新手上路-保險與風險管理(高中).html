@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新手上路-保險與風險管理(高中) - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-shield-halved"></i> 新手上路-保險與風險管理(高中)
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-senior"><i class="fa-solid fa-graduation-cap"></i> 高中階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-shield-heart"></i> 保險與風險管理</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：新手上路（機車安全、風險應對策略與保險保障）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010260300000000000&type=Doc&PKID=6bc72df6-40b5-4b7a-9bd0-12fd7cf6d7a2" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立高中">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：三年二班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 掌握風險管理的四種基本策略：風險規避、風險降低、風險移轉（保險）與風險自留。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 釐清機車駕駛法律責任與保險功能：強制汽車責任險、第三人責任險與車體損失險的保障範疇。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 區分人身保險（人壽、健康、傷害、年金）與財產保險的本質差異，懂得善用保險分散意外帶來的經濟衝擊。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【新手上路】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：風險規避、風險移轉、強制險、第三人責任險、人身保險）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">02:39 - 03:17</span><br>
+              <span class="dialogue-speaker">媽媽</span>：不出門確實是規避風險的一種方式，但應該是早知道不要超速騎這麼快，至少可以避免打滑的風險發生。<br>
+              <span class="dialogue-speaker">爸爸</span>：只要騎車一定要戴好安全帽，才能降低意外傷害。<br>
+              <span class="dialogue-speaker">媽媽</span>：還好我有投保傷害保險，醫療費的部分可以靠保險分擔，減輕一些負擔。<br>
+              <span class="dialogue-speaker">爸爸</span>：不過像褲子磨破這類的物損，通常不在理賠範圍內，你可要風險自留，自己承擔損失再買一條新的啦。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">04:04 - 04:15</span><br>
+              <span class="dialogue-speaker">媽媽</span>：這就是風險移轉的意思。透過保險，當意外發生時，能有保險金來彌補損失，減輕意外帶來的經濟負擔。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">04:46 - 05:14</span><br>
+              <span class="dialogue-speaker">爸爸</span>：假設你騎車不小心撞到了行人或其他車輛，造成對方受傷或財務損失，如果你有購買第三人責任保險，保險公司就會幫你支付這些賠償金。<br>
+              <span class="dialogue-speaker">媽媽</span>：若有保車體損失保險，車子受損部分就可以申請理賠，減少修車負擔。
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">05:27 - 05:56</span><br>
+              <span class="dialogue-speaker">爸爸</span>：人身保險和財產保險是不一樣的。人身保險有人壽保險、健康保險、傷害保險還有年金保險。至於車體的損失，或是對第三人責任這類的財產保險，則是減輕個人財物損失或應負擔的賠償責任。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：風險管理與保險基礎隨堂測驗</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。媽媽幫建智投保傷害醫療保險，在意外受傷時由保險公司給付理賠金分擔龐大醫藥費，這屬於將經濟風險轉交給保險公司的「風險移轉 (Risk Transfer)」。">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              建智騎車打滑擦傷送醫，媽媽說「還好有投保傷害保險分擔醫藥費」。此行為在風險管理中屬於哪一種策略？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="ins_q1" value="A">
+                <span>(A) 風險規避 (Risk Avoidance)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q1" value="B">
+                <span>(B) 風險自留 (Risk Retention)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q1" value="C">
+                <span>(C) 風險移轉 (Risk Transfer)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q1" value="D">
+                <span>(D) 風險完全忽視</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。強制汽車責任保險僅提供車禍受害人基本人身傷亡與醫療保障，不包含對方的財物車損，也不包含自身機車損壞。因此若不慎撞損昂貴超跑或造成重大財損，需仰賴「第三人責任保險（財損）」甚至「超額責任險」補足！">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              關於機車必保的「強制汽車責任保險」，下列何種狀況屬於其「無法理賠」的範圍？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="ins_q2" value="A">
+                <span>(A) 乘客或路人在車禍中的體傷醫療費用</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q2" value="B">
+                <span>(B) 撞壞對方法拉利超跑的高額板金維修費（財物損失）</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q2" value="C">
+                <span>(C) 受害者因車禍失能的法定保險給付</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q2" value="D">
+                <span>(D) 交通事故中受害人的身故理賠金</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="D" data-explanation="正解為 (D)。人壽保險、健康保險、傷害保險、年金保險屬於「人身保險」（以人的生命、身體為標的）；而機車車體險、火災險、第三人責任保險則屬於「財產保險」。">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              爸爸向建智解釋保險分類，下列哪一組保險「全部屬於人身保險」？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="ins_q3" value="A">
+                <span>(A) 房屋火災保險、機車車體損失險</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q3" value="B">
+                <span>(B) 第三人責任保險、貨物運送險</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q3" value="C">
+                <span>(C) 機車竊盜險、寵物財產險</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="ins_q3" value="D">
+                <span>(D) 人壽保險、健康保險、傷害保險、年金保險</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 風險情境思辨題 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-road"></i> 第二部分：高中生騎乘安全與風險思辨</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【安全情境思辨】：滿18歲考取機車駕照是許多高中生的期待，但根據統計，年輕騎士事故率居高不下。
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              請以影片中提及的四大策略為架構，各列舉一項你在「騎機車」或「日常外出」時能具體落實的做法：<br>
+              1. <strong>風險規避</strong>：<br>
+              2. <strong>風險降低</strong>：<br>
+              3. <strong>風險移轉</strong>：<br>
+              4. <strong>風險自留</strong>：
+            </p>
+            <div class="reflection-box">
+              <textarea id="riskFourStrategies" class="reflection-textarea" placeholder="例如：1.風險規避：颱風暴雨或酒後絕不騎車；2.風險降低：騎車佩戴合格全罩安全帽並定期保養輪胎煞車；3.風險移轉：投保第三人責任險與意外醫療險；4.風險自留：車身輕微擦傷自行修補..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 手繪四象限風險矩陣 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> 第三部分：動手繪製「生活風險矩陣 (Risk Matrix) 與騎士守護網」</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 請在下方畫布上畫出一個十字座標<strong>「四象限矩陣」</strong>（橫軸為「發生頻率 高/低」，縱軸為「損失程度 大/小」），並將<strong>「嚴重車禍」、「輪胎扎釘破皮」、「褲子磨破」、「忘拔鑰匙」</strong>等生活風險填入對應的象限中，並標註應對策略！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 一般鋼筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="2">細 (2px)</option>
+              <option value="5" selected>適中 (5px)</option>
+              <option value="12">粗 (12px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="經典黑"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="安全藍"></div>
+            <div class="color-swatch" data-color="#dc2626" style="background-color: #dc2626;" title="高風險紅"></div>
+            <div class="color-swatch" data-color="#16a34a" style="background-color: #16a34a;" title="防護綠"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#f59e0b" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-shield-halved"></i> 風險管理矩陣畫布
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-shield-heart"></i> 第四部分：學習心得與安全防護承諾</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              建智在片中說：「保險真的是一種風險管理最好的工具，尤其對經濟條件比較普通的人來說。」你如何理解這句話？在即將成年的階段，你將如何為自己的安全與家人負責？
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的心得體悟（至少 30 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_insurance_risk');
+      WorksheetExporter.setupExportButtons('新手上路-保險與風險管理(高中)');
+    });
+  </script>
+</body>
+</html>

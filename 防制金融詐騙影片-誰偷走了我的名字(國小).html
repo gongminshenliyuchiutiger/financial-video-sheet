@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防制金融詐騙影片-誰偷走了我的名字(國小) - 互動式學習單</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas & jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Site Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>金融基礎教育互動學習單系統</span>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="nav-link-btn">
+          <i class="fa-solid fa-house"></i>
+          <span>返回首頁</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sticky Action Bar -->
+  <div class="action-bar-wrapper">
+    <div class="action-bar-container">
+      <div class="action-bar-left">
+        <a href="index.html" class="btn-action btn-action-outline">
+          <i class="fa-solid fa-arrow-left"></i> 回學習單總覽
+        </a>
+      </div>
+      <div class="action-bar-right">
+        <button type="button" id="btnExportPNG" class="btn-action btn-action-primary">
+          <i class="fa-solid fa-file-image"></i> 輸出成 PNG
+        </button>
+        <button type="button" id="btnExportPDF" class="btn-action btn-action-secondary">
+          <i class="fa-solid fa-file-pdf"></i> 輸出成 PDF
+        </button>
+        <button type="button" id="btnResetSheet" class="btn-action btn-action-danger" title="重設所有作答">
+          <i class="fa-solid fa-rotate-left"></i> 重設
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Printable Worksheet Paper Container -->
+  <div class="worksheet-wrapper">
+    <div class="worksheet-paper" id="worksheetPaper">
+      
+      <!-- Worksheet Header -->
+      <div class="sheet-header">
+        <div class="sheet-title-row">
+          <h1 class="sheet-title">
+            <i class="fa-solid fa-user-lock"></i> 防制金融詐騙影片-誰偷走了我的名字(國小)
+          </h1>
+          <div class="sheet-meta-badges">
+            <span class="badge badge-elementary"><i class="fa-solid fa-child-reaching"></i> 國小階段</span>
+            <span class="badge badge-topic"><i class="fa-solid fa-shield-virus"></i> 防制金融詐騙</span>
+          </div>
+        </div>
+
+        <!-- Official Video Banner -->
+        <div class="video-banner-box">
+          <div class="video-banner-info">
+            <i class="fa-solid fa-circle-play"></i>
+            <div>
+              <strong>單元對應教學影片：誰偷走了我的名字（帳號被盜、釣魚防護與165反詐騙）</strong>
+              <div style="font-size: 0.825rem; color: #4b5563; font-weight: normal;">教育部與金融監督管理委員會保險局金融基礎教育教學影片</div>
+            </div>
+          </div>
+          <a href="https://rm.ib.gov.tw/pages/FKLearning_new.aspx?Dir=010280101000000000&type=Doc&PKID=4580d761-6a4d-46e6-a517-3f892a940cf7" target="_blank" rel="noopener noreferrer" class="btn-play-video">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> 開啟官方影片專區
+          </a>
+        </div>
+
+        <!-- Student Info Bar -->
+        <div class="student-info-grid">
+          <div class="info-field-group">
+            <label class="info-field-label" for="schoolName"><i class="fa-solid fa-school"></i> 學校名稱</label>
+            <input type="text" id="schoolName" class="info-field-input" placeholder="例如：市立國小">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="className"><i class="fa-solid fa-users"></i> 班級</label>
+            <input type="text" id="className" class="info-field-input" placeholder="例如：六年二班">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="seatNumber"><i class="fa-solid fa-arrow-down-1-9"></i> 座號</label>
+            <input type="number" id="seatNumber" class="info-field-input" placeholder="座號" min="1" max="99">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="studentName"><i class="fa-solid fa-user-pen"></i> 學生姓名</label>
+            <input type="text" id="studentName" class="info-field-input" placeholder="請輸入姓名">
+          </div>
+          <div class="info-field-group">
+            <label class="info-field-label" for="sheetDate"><i class="fa-regular fa-calendar-check"></i> 完成日期</label>
+            <input type="date" id="sheetDate" class="info-field-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Objectives -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bullseye"></i> 本單元核心學習目標</h2>
+        </div>
+        <div class="section-body">
+          <ul class="objectives-list">
+            <li><i class="fa-solid fa-circle-check"></i> 認清「天下沒有白吃的午餐」，防範假冒「免費贈送文具/遊戲禮包」之釣魚網站詐騙陷阱。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 學會辨識假網址的細節（奇怪結尾副檔名、英文字母 O 與數字 0 替換等手法）。</li>
+            <li><i class="fa-solid fa-circle-check"></i> 掌握個人帳號安全守護法：啟用兩步驟驗證、設定高強度密碼，並熟記 165 反詐騙專線報案檢舉三步驟。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Collapsible Transcript Viewer -->
+      <div class="transcript-accordion">
+        <div class="transcript-summary-toggle">
+          <span><i class="fa-solid fa-file-lines"></i> 點擊展開 / 收合【誰偷走了我的名字】影片完整逐字稿對照</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="transcript-content-panel">
+          <div class="transcript-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="transcriptSearch" placeholder="搜尋對話關鍵字（如：彩色鉛筆、密碼、兩步驟驗證、165、截圖）...">
+          </div>
+          <div class="transcript-text-viewer">
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">00:27 - 00:57</span><br>
+              <span class="dialogue-speaker">樂樂</span>：那組彩色鉛筆真的好漂亮喔！我只是填一下資料，又不是給錢，應該沒關係？……咦？怎麼自己跳出去？密碼錯了嗎？
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">01:18 - 01:43</span><br>
+              <span class="dialogue-speaker">爸爸</span>：樂樂，你怎麼那麼不小心啊？你知道現在有多少同學收到你傳的詐騙連結嗎？<br>
+              <span class="dialogue-speaker">樂樂</span>：我只是不小心點了一個網站，就變成這樣……那個亂發訊息的我不是我啊！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">03:16 - 03:43</span><br>
+              <span class="dialogue-speaker">爸爸</span>：我們來改個強度更高的密碼，同時要開啟兩步驟的驗證登入，這樣比較安全哪。像這種結尾奇奇怪怪的網站，跟平常看到的 .com 或 .org 不同的，很有可能是詐騙！<br>
+              <span class="dialogue-speaker">媽媽</span>：還有把英文字母 O 換成數字 0，如果不仔細看也很容易上當喔！
+            </div>
+            <div class="transcript-dialogue-item">
+              <span class="dialogue-timestamp">03:44 - 04:20</span><br>
+              <span class="dialogue-speaker">媽媽</span>：現在來把剛才的那些截圖、被盜用的對話全部存起來當重要證據。這個就是 165 反詐騙專線，只要點「我要檢舉」再把截圖上傳，就可以讓更多人知道！
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 1: 觀念隨堂測驗 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-list-check"></i> 第一部分：網路防釣魚隨堂測驗</h2>
+          <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">點選答案後點擊「核對答案」即時解析</span>
+        </div>
+        <div class="section-body">
+
+          <!-- Q1 -->
+          <div class="question-block" data-correct="B" data-explanation="正解為 (B)。樂樂想要漂亮的彩色鉛筆，在不明網頁隨便輸入個人帳號密碼，導致帳號密碼被詐騙集團側錄盜取，這就是典型的「釣魚網頁 (Phishing)」！">
+            <h3 class="question-title">
+              <span class="q-number">1</span>
+              影片中樂樂的帳號為什麼會突然被壞人盜走，並發送詐騙訊息給所有同學？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="name_q1" value="A">
+                <span>(A) 因為樂樂的平板電腦沒電關機了</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q1" value="B">
+                <span>(B) 為了領取免費彩色鉛筆，誤點不明釣魚網址並主動填寫了帳號與密碼</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q1" value="C">
+                <span>(C) 因為樂樂在電腦前吃了太多餅乾</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q1" value="D">
+                <span>(D) 因為樂樂把平板借給媽媽查資料</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="question-block" data-correct="C" data-explanation="正解為 (C)。爸爸媽媽提醒，詐騙集團常使用外觀極相似的英文字母與數字替換（例如把英文大寫 O 換成阿拉伯數字 0，或將 l 換成 1），以及怪異結尾域名誘騙學童誤入陷阱。">
+            <h3 class="question-title">
+              <span class="q-number">2</span>
+              爸爸媽媽在片中提到，辨識「詐騙釣魚網址」的一個非常重要的特徵細節是什麼？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="name_q2" value="A">
+                <span>(A) 網頁的字體顏色一定是粉紅色</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q2" value="B">
+                <span>(B) 網站打開來會播放很大的警報聲</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q2" value="C">
+                <span>(C) 網址結尾奇奇怪怪，或故意把英文字母 O 替換成數字 0 讓人混淆</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q2" value="D">
+                <span>(D) 網站首頁一定會出現大野狼的照片</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="question-block" data-correct="D" data-explanation="正解為 (D)。遇到網路詐騙或帳號被盜，應立刻告知家長老師、截圖保存被盜訊息與對話、更改高強度密碼開啟兩步驟驗證，並撥打 165 反詐騙專線尋求警方協助。">
+            <h3 class="question-title">
+              <span class="q-number">3</span>
+              當發現自己的社交帳號或同學帳號疑似被盜用、到處亂發怪怪的得獎連結時，下列何種做法最正確？
+            </h3>
+            <div class="options-group">
+              <label class="option-label">
+                <input type="radio" name="name_q3" value="A">
+                <span>(A) 假裝沒看到，繼續四處幫忙轉發</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q3" value="B">
+                <span>(B) 趕快在該連結裡面輸入自己家裡地址與銀行存摺號碼</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q3" value="C">
+                <span>(C) 把平板丟進水裡洗一洗</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="name_q3" value="D">
+                <span>(D) 截圖保存證據、通知家長與同學不要點選，並撥打 165 反詐騙專線檢舉</span>
+              </label>
+            </div>
+            <button type="button" class="btn-check-answer"><i class="fa-solid fa-spell-check"></i> 核對答案</button>
+            <div class="explanation-box"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Task 2: 資安情境應變大挑戰 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-user-shield"></i> 第二部分：我的帳號救援大作戰情境題</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">4</span>
+              【資安情境題】：如果有一天你在常用的小遊戲或通訊軟體裡，收到好友傳來：「恭喜你被抽中！點這個網址輸入電話與帳密，馬上免費送你 1000 顆遊戲魔法石！」
+            </h3>
+            <p style="font-size: 0.925rem; color: #4b5563; margin-bottom: 12px; line-height: 1.6;">
+              這時候你會怎麼做？請寫出你的三步驟防護行動（提示：求證好友、絕不輸入密碼、通知師長報警 165）：
+            </p>
+            <div class="reflection-box">
+              <textarea id="accountSecuritySteps" class="reflection-textarea" placeholder="我的安全三步驟：第一步... 第二步... 第三步..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 3: 互動畫布 - 動手畫出我的網路神盾 -->
+      <section class="section-card canvas-activity-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-shield"></i> 第三部分：動手繪製「我的個人個資防護神盾 (Cyber Shield)」</h2>
+        </div>
+        <div style="padding: 16px 20px; background: #fffbe6; border-bottom: 1px solid #fde047; font-size: 0.9rem; color: #854d0e;">
+          <i class="fa-solid fa-lightbulb"></i> <strong>作答引導：</strong> 樂樂在爸爸媽媽協助下「展開帳號救援大作戰」！請在下方畫布上，繪製一面<strong>「強大的資安神盾」</strong>，盾牌上寫出你為帳號設定的<strong>「防詐三法寶」</strong>（例如：雙重驗證、複雜密碼、不亂點連結、撥打165）！
+        </div>
+
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+          <div class="canvas-tool-group">
+            <button type="button" class="canvas-tool-btn active" data-tool="pen">
+              <i class="fa-solid fa-pen"></i> 彩色筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="highlighter">
+              <i class="fa-solid fa-highlighter"></i> 螢光筆
+            </button>
+            <button type="button" class="canvas-tool-btn" data-tool="eraser">
+              <i class="fa-solid fa-eraser"></i> 橡皮擦
+            </button>
+          </div>
+
+          <div class="canvas-tool-group">
+            <span style="font-size: 0.8rem; color: #94a3b8;">筆刷粗細：</span>
+            <select id="brushSizeSelect" class="canvas-size-select">
+              <option value="3">細 (3px)</option>
+              <option value="6" selected>中等 (6px)</option>
+              <option value="14">粗 (14px)</option>
+            </select>
+          </div>
+
+          <div class="canvas-tool-group color-palette">
+            <span style="font-size: 0.8rem; color: #94a3b8;">顏色：</span>
+            <div class="color-swatch active" data-color="#1e293b" style="background-color: #1e293b;" title="黑色"></div>
+            <div class="color-swatch" data-color="#2563eb" style="background-color: #2563eb;" title="防護藍"></div>
+            <div class="color-swatch" data-color="#dc2626" style="background-color: #dc2626;" title="警示紅"></div>
+            <div class="color-swatch" data-color="#10b981" style="background-color: #10b981;" title="安全綠"></div>
+            <div class="color-swatch" data-color="#f59e0b" style="background-color: #f59e0b;" title="神盾金"></div>
+            <input type="color" id="customColorPicker" class="custom-color-input" value="#9333ea" title="自選顏色">
+          </div>
+
+          <div class="canvas-tool-group">
+            <button type="button" id="canvasUndoBtn" class="canvas-tool-btn" title="復原上一筆">
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button type="button" id="canvasRedoBtn" class="canvas-tool-btn" title="重做">
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button type="button" id="canvasClearBtn" class="canvas-tool-btn" title="清空畫布">
+              <i class="fa-solid fa-trash-can"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-container">
+          <canvas id="worksheetCanvas" class="interactive-canvas"></canvas>
+          <div class="canvas-watermark">
+            <i class="fa-solid fa-shield-halved"></i> 我的資安防護神盾畫布
+          </div>
+        </div>
+      </section>
+
+      <!-- Task 4: 學習心得與反思 -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-award"></i> 第四部分：學習心得與小小防詐守護員宣言</h2>
+        </div>
+        <div class="section-body">
+          <div class="question-block">
+            <h3 class="question-title">
+              <span class="q-number">5</span>
+              樂樂說：「我以後一定會小心，不會再亂點連結，也會保護好自己的帳號！」請寫下一段話，提醒你的好朋友或家人，在網路上遇到好康贈品時應該注意什麼：
+            </h3>
+            <div class="reflection-box">
+              <textarea id="studentReflection" class="reflection-textarea" placeholder="寫下你的防詐叮嚀（至少 25 字）..."></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Evaluation & Teacher Sign Area -->
+      <div class="eval-section">
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-star"></i> 學生學習自我評量</div>
+          <div class="stars-rating" data-rating="0">
+            <button type="button" class="star-btn" title="1 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="2 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="3 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="4 星"><i class="fa-solid fa-star"></i></button>
+            <button type="button" class="star-btn" title="5 星"><i class="fa-solid fa-star"></i></button>
+          </div>
+          <span style="font-size: 0.8rem; color: #64748b;">點選星星為自己的專注與理解程度打分數</span>
+        </div>
+        <div class="eval-card">
+          <div class="eval-title"><i class="fa-solid fa-marker"></i> 教師/家長評閱回饋</div>
+          <input type="text" id="teacherFeedback" class="info-field-input" placeholder="評語或簽章（可於輸出前填寫）">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- FB Fan Page Button -->
+      <a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank" rel="noopener noreferrer" class="fb-fanpage-btn" title="前往 快樂鯉魚秋老虎 Facebook 粉絲專頁">
+        <i class="fa-brands fa-facebook"></i>
+        <span>FB粉絲專頁｜快樂鯉魚秋老虎</span>
+      </a>
+
+      <!-- Copyright Statement -->
+      <p class="copyright-text">Copyright © Liyuchiutiger Gongminshen</p>
+    </div>
+  </footer>
+
+  <!-- Floating Draggable Mascot -->
+  <div id="liyuChillGuyMascot" class="mascot-container" role="region" aria-label="鯉魚秋老虎吉祥物">
+    <div class="mascot-image-wrapper">
+      <img src="image/LiyuChillGuy.svg" alt="吉祥物 快樂鯉魚秋老虎" class="mascot-img" draggable="false" />
+    </div>
+    <div class="mascot-drag-hint">
+      <i class="fa-solid fa-up-down-left-right"></i> 可拖曳
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mascot.js"></script>
+  <script src="js/canvas-tool.js"></script>
+  <script src="js/export-tool.js"></script>
+  <script src="js/worksheet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      new WorksheetCanvas('worksheetCanvas', 'canvas_who_stole_name');
+      WorksheetExporter.setupExportButtons('防制金融詐騙影片-誰偷走了我的名字(國小)');
+    });
+  </script>
+</body>
+</html>
