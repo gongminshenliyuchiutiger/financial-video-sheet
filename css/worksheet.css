@@ -96,6 +96,19 @@
   background: #fecaca;
 }
 
+.btn-action-word {
+  background: #185abd;
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.btn-action-word:hover {
+  background: #103f8a;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
 /* ==========================================================================
    Worksheet Paper Structure (Printable Page)
    ========================================================================== */
@@ -345,7 +358,7 @@ input[type="date"].info-field-input {
   padding: 20px;
   background: #ffffff;
   border-top: 1px solid #cbd5e1;
-  max-height: 480px;
+  max-height: 520px;
   overflow-y: auto;
 }
 
@@ -356,11 +369,18 @@ input[type="date"].info-field-input {
 
 .transcript-search-box input {
   width: 100%;
-  padding: 8px 12px 8px 36px;
+  padding: 10px 14px 10px 38px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   outline: none;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.transcript-search-box input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
 }
 
 .transcript-search-box i {
@@ -372,38 +392,243 @@ input[type="date"].info-field-input {
 }
 
 .transcript-text-viewer {
-  font-size: 0.925rem;
-  line-height: 1.8;
+  font-size: 0.95rem;
+  line-height: 1.7;
   color: #334155;
-  white-space: pre-wrap;
-  font-family: Consolas, "PingFang TC", "Noto Sans TC", monospace;
-  background: #fafafa;
+  background: #f8fafc;
   padding: 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid #f1f5f9;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
 }
 
 .transcript-dialogue-item {
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px dashed #e2e8f0;
+  margin-bottom: 14px;
+  padding: 12px 16px;
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid var(--secondary-color);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.transcript-dialogue-item:hover {
+  background: #fafafa;
+  border-left-color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
+
+.dialogue-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .dialogue-timestamp {
-  display: inline-block;
-  background: #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f1f5f9;
   color: #475569;
-  font-size: 0.775rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  margin-bottom: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid #e2e8f0;
 }
 
 .dialogue-speaker {
   font-weight: 800;
-  color: var(--primary-color);
+  color: #1e3a8a;
+  padding: 2px 8px;
+  background: #e0f2fe;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-right: 4px;
 }
+
+.dialogue-action {
+  font-style: italic;
+  color: #64748b;
+  font-size: 0.875rem;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dialogue-line {
+  margin: 4px 0;
+  line-height: 1.65;
+  color: #1e293b;
+}
+
+/* ==========================================================================
+   Extended Concepts & Collaborative Group Discussion Styles
+   ========================================================================== */
+.concept-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 18px;
+}
+
+.concept-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  font-size: 0.825rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.concept-callout {
+  background: #f0f9ff;
+  border-left: 4px solid #0284c7;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  font-size: 0.95rem;
+  color: #0c4a6e;
+  line-height: 1.65;
+}
+
+.concept-callout h4 {
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0369a1;
+}
+
+.group-activity-card {
+  background: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.group-activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.group-activity-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #6b21a8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.group-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fae8ff;
+  color: #86198f;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid #f0abfc;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+@media (max-width: 768px) {
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.activity-column {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.activity-column h5 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--dark-text);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.activity-textarea {
+  width: 100%;
+  min-height: 110px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.925rem;
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.consensus-box {
+  margin-top: 16px;
+  background: #ffffff;
+  border: 1px solid #c7d2fe;
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.action-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 20px;
+  font-size: 0.925rem;
+}
+
+.action-table th, .action-table td {
+  border: 1px solid #cbd5e1;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.action-table th {
+  background: #f1f5f9;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.action-table td input[type="text"],
+.action-table td select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
 
 /* ==========================================================================
    Quiz & Interactive Questions

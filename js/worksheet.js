@@ -25,7 +25,7 @@
       dateInput.value = today;
     }
 
-    const inputs = document.querySelectorAll('.info-field-input, .reflection-textarea');
+    const inputs = document.querySelectorAll('.info-field-input, .reflection-textarea, .activity-textarea');
     inputs.forEach(input => {
       input.addEventListener('input', () => {
         saveFormData();
@@ -138,7 +138,7 @@
       if (input.id) data.inputs[input.id] = input.value;
     });
 
-    document.querySelectorAll('.reflection-textarea').forEach(ta => {
+    document.querySelectorAll('.reflection-textarea, .activity-textarea').forEach(ta => {
       if (ta.id) data.textareas[ta.id] = ta.value;
     });
 

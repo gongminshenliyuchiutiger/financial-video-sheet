@@ -487,6 +487,31 @@ a {
   border-color: #dc2626;
 }
 
+.btn-card-word {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #eff6ff;
+  color: #185abd;
+  border: 1px solid #bfdbfe;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-card-word:hover {
+  background: #185abd;
+  color: #ffffff;
+  border-color: #185abd;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
 /* Empty search state */
 .empty-state {
   grid-column: 1 / -1;
